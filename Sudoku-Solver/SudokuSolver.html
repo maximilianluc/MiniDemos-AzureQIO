@@ -14338,11 +14338,8 @@ a.anchor-link {
 <span class="kn">from</span> <span class="nn">azure.quantum.optimization</span> <span class="kn">import</span> <span class="n">SimulatedAnnealing</span><span class="p">,</span> <span class="n">ParallelTempering</span><span class="p">,</span> <span class="n">Tabu</span><span class="p">,</span> <span class="n">QuantumMonteCarlo</span><span class="p">,</span> <span class="n">HardwarePlatform</span><span class="p">,</span> <span class="n">Solver</span>
 
 <span class="n">workspace</span> <span class="o">=</span> <span class="n">Workspace</span><span class="p">(</span>
-    <span class="n">subscription_id</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>  <span class="c1"># Add your subscription_id</span>
-    <span class="n">resource_group</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>   <span class="c1"># Add your resource_group</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>             <span class="c1"># Add your workspace name</span>
-    <span class="n">location</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>          <span class="c1"># Add your workspace location (for example, &quot;westus&quot;)</span>
-    <span class="n">resource_id</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">resource_id</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="c1"># add the Resource ID of your Azure Quantum workspace</span>
+    <span class="n">location</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>     <span class="c1"># add the location of your Azure Quantum workspace (e.g. &quot;westus&quot;)</span>
 <span class="p">)</span>
 
 
@@ -14404,7 +14401,7 @@ a.anchor-link {
 
 <span class="c1">############################################################################################</span>
 <span class="c1">##### Generate cost function</span>
-<span class="n">OptimizationProblem</span> <span class="o">=</span> <span class="n">SudokuProblem</span><span class="p">(</span><span class="n">Sudoku4A</span><span class="p">)</span>
+<span class="n">OptimizationProblem</span> <span class="o">=</span> <span class="n">SudokuProblem</span><span class="p">(</span><span class="n">Sudoku9A</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14530,7 +14527,7 @@ $$ \sum_{r = 0}^{n^2} \hspace{0.2cm} \sum_{ref=r n^4}^{ (r+1) n^4 } \hspace{0.2c
     <span class="c1">#####</span>
     <span class="c1">##### Constraint 1: Per cell, only one variable may be &#39;1&#39;, the others must be zero =&gt; then only one integer is assigned to the cell</span>
 
-    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>                                     <span class="c1"># iterate over the rows of the matrix</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>                                    <span class="c1"># iterate over the rows of the matrix</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>                                 <span class="c1"># iterate over the columns of the matrix</span>
             <span class="k">for</span> <span class="n">ref</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>                           <span class="c1"># select the reference variable in cell</span>
                 <span class="k">for</span> <span class="n">tar</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>                       <span class="c1"># select the target variable in cell  </span>
@@ -14604,11 +14601,11 @@ $$ \sum_{ref=0}^{n^6} \hspace{0.3cm }\sum_{tar=ref, \text{ stepsize: } n^4 }^{n^
     <span class="c1">#####</span>
     <span class="c1">##### Constraint 1: Per cell, only one variable may be &#39;1&#39;, the others must be zero =&gt; then only one integer is assigned to the cell</span>
 
-    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>                                     <span class="c1"># iterate over the rows of the matrix</span>
-        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>                                 <span class="c1"># iterate over the columns of the matrix</span>
-            <span class="k">for</span> <span class="n">ref</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>                           <span class="c1"># select the reference variable in cell</span>
-                <span class="k">for</span> <span class="n">tar</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>                       <span class="c1"># select the target variable in cell  </span>
-                    <span class="k">if</span> <span class="n">ref</span><span class="o">&lt;</span><span class="n">tar</span><span class="p">:</span>                                     <span class="c1"># prevent weighting combinations twice, therefore ref&lt;tar</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>                    <span class="c1"># iterate over the rows of the matrix</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>                 <span class="c1"># iterate over the columns of the matrix</span>
+            <span class="k">for</span> <span class="n">ref</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>           <span class="c1"># select the reference variable in cell</span>
+                <span class="k">for</span> <span class="n">tar</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>       <span class="c1"># select the target variable in cell  </span>
+                    <span class="k">if</span> <span class="n">ref</span><span class="o">&lt;</span><span class="n">tar</span><span class="p">:</span>                     <span class="c1"># prevent weighting combinations twice, therefore ref&lt;tar</span>
                         <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                             <span class="n">Term</span><span class="p">(</span>
                                 <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -14672,8 +14669,11 @@ $$ \sum_{ref=0}^{n^6} \hspace{0.3cm }\sum_{tar=ref, \text{ stepsize: } n^4 }^{n^
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Sum-of-the-subgrid's-cells">Sum of the subgrid's cells<a class="anchor-link" href="#Sum-of-the-subgrid's-cells">&#182;</a></h2><p>The sum of each subgrid's cells must equal the sum of the different integers. Modeling this constraint is a bit tricky because we have to iterate over variables that are not separated by a constant value, as in the previous constraints. For ease, let's split the problem into two subproblems. In the first, we'll go over finding the variables in a subgrid and store them in a dictionary. In the second, we'll use the dictionary to weight variable combinations to form the constraint.</p>
-<h3 id="1.-Finding-the-variables-in-a-subgrid">1. Finding the variables in a subgrid<a class="anchor-link" href="#1.-Finding-the-variables-in-a-subgrid">&#182;</a></h3><p>A sudoku consists of $n^2$ subgrids and can be understood as a $n \times n$ matrix. The idea is that we will first create an indexing for these subgrids. For example, $A(0,0)$ will denote the top-left subgrid and $A(2,2)$ the bottom-right subgrid (for $9 \times 9$ Sudoku "$A$"). This will allow us to easily specify variables later on. Realizing that we will need to iterate over all subgrids gives us the first part summations:</p>
-$$ \Large \sum_{\text{sg_r}=0}^{n-1} \sum_{\text{sg_c}=0}^{n-1}$$<p></p>
+<h3 id="1.-Finding-the-variables-in-a-subgrid">1. Finding the variables in a subgrid<a class="anchor-link" href="#1.-Finding-the-variables-in-a-subgrid">&#182;</a></h3><p>A sudoku consists of $n^2$ subgrids ($n \times n$), each of which can be understood as a $n \times n$ matrix. The idea is that we will first create an indexing for these subgrids. For example in a $9 \times 9$ Sudoku "$A$", $A(0,0)$ will denote the top-left subgrid and $A(2,2)$ the bottom-right subgrid. This will allow us to easily specify variables later on. Realizing that we will need to iterate over all subgrids gives us the first part summations, two 'for' loops to specicy each subgrid.</p>
+<ul>
+<li>'sg_r' stands for "subgrid_row", of which there are $n$.</li>
+<li>'sg_c' stands for "subgrid_column", of which there are $n$. </li>
+</ul>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14683,45 +14683,13 @@ $$ \Large \sum_{\text{sg_r}=0}^{n-1} \sum_{\text{sg_c}=0}^{n-1}$$<p></p>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span>    <span class="c1">##### 1. First get the variables for each sub-grid (sg)  and store it in a dictionary</span>
-    <span class="n">sg_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>                                                                               <span class="c1"># define a dict for storing the variables per box</span>
-    <span class="k">for</span> <span class="n">sg_r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">))):</span>                                                                   <span class="c1"># iterate over of row indices for the boxes</span>
-        <span class="k">for</span> <span class="n">sg_c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">))):</span>                                                               <span class="c1"># iterate over of column indices for the boxes</span>
-            <span class="n">sg_dict</span><span class="p">[</span><span class="n">sg_r</span><span class="p">][</span><span class="n">sg_c</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>                                                                          <span class="c1"># intialize list for a new box </span>
-            <span class="k">for</span> <span class="n">row_num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">))):</span>                                                        <span class="c1"># iterate over rows of a box (is multiplied by N^2 later)</span>
-                <span class="k">for</span> <span class="n">row_i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">N</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">))):</span>                                                    <span class="c1"># iterate over number of variables per row in a box                                                          </span>
-                    <span class="n">variable</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">row_i</span><span class="o">+</span><span class="p">(</span><span class="n">row_num</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="p">(</span><span class="n">sg_r</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">+</span><span class="n">sg_c</span><span class="o">*</span><span class="n">N</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">)))</span>     <span class="c1"># compute variable number and append to list</span>
-                    <span class="n">sg_dict</span><span class="p">[</span><span class="n">sg_r</span><span class="p">][</span><span class="n">sg_c</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>                                                         <span class="c1"># append variable list for that box inside a dict                     </span>
-                    <span class="c1">##### uncomment if you want to see the variables</span>
-                    <span class="c1">#print(f&#39;Added {variable} in list of box({sg_r},{sg_c})&#39;)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Sudoku9A</span><span class="p">)))</span>            <span class="c1"># specify one of the sudokus, as this will be added to the function later (n is defined in the function)</span>
 
-    <span class="n">sg_r</span><span class="p">,</span> <span class="n">sg_c</span><span class="p">,</span> <span class="n">row_num</span><span class="p">,</span> <span class="n">row_i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span> 
-
-    <span class="c1">##### 2. Now weight the variables that represent the same value and are inside the same box </span>
-    <span class="k">for</span> <span class="n">sg_r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">))):</span>                                                                          
-        <span class="k">for</span> <span class="n">sg_c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">))):</span>
-            <span class="n">box</span> <span class="o">=</span> <span class="n">sg_dict</span><span class="p">[</span><span class="n">sg_r</span><span class="p">][</span><span class="n">sg_c</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">shift</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
-                <span class="c1">#print(f&#39;shift:{shift}&#39;)</span>
-                <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shift</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">box</span><span class="p">),</span><span class="n">N</span><span class="p">):</span>
-                    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">box</span><span class="p">),</span><span class="n">N</span><span class="p">):</span>
-                        <span class="c1">#print(r)</span>
-                        <span class="c1">#print(t)</span>
-
-                        <span class="n">row_num_r</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">box</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">/</span><span class="nb">pow</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-                        <span class="n">col_num_r</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">box</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">%</span><span class="k">pow</span>(N,2))/N)
-                        <span class="n">row_num_t</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">box</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">/</span><span class="nb">pow</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-                        <span class="n">col_num_t</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">box</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">%</span><span class="k">pow</span>(N,2))/N)
-
-                        <span class="c1">#print(f&#39;ref:{row_num_r},{col_num_r}&#39;)</span>
-                        <span class="c1">#print(f&#39;tar:{row_num_t},{col_num_t}&#39;)</span>
-                        <span class="k">if</span> <span class="n">row_num_r</span> <span class="o">!=</span> <span class="n">row_num_t</span> <span class="ow">and</span> <span class="n">col_num_r</span> <span class="o">!=</span> <span class="n">col_num_t</span><span class="p">:</span>
-                            <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                                <span class="n">Term</span><span class="p">(</span>
-                                    <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-                                    <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">box</span><span class="p">[</span><span class="n">r</span><span class="p">],</span><span class="n">box</span><span class="p">[</span><span class="n">t</span><span class="p">]]</span>   
-                                <span class="p">)</span>
-                            <span class="p">)</span>
-                            <span class="c1">#print(f&#39;{box[r]},{box[t]}&#39;)   </span>
+    <span class="n">sg_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>                <span class="c1"># define a dict for storing the variables per subgrids</span>
+    <span class="k">for</span> <span class="n">sg_r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>                    <span class="c1"># iterate over of row indices for the subgrids</span>
+        <span class="k">for</span> <span class="n">sg_c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>                <span class="c1"># iterate over of column indices for the subgrids</span>
+            <span class="n">sg_dict</span><span class="p">[</span><span class="n">sg_r</span><span class="p">][</span><span class="n">sg_c</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>           <span class="c1"># intialize list for a new subgrid</span>
+            
 </pre></div>
 
      </div>
@@ -14729,6 +14697,366 @@ $$ \Large \sum_{\text{sg_r}=0}^{n-1} \sum_{\text{sg_c}=0}^{n-1}$$<p></p>
 </div>
 </div>
 
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Now we have to find all the integers' index values for each cell in the subgrid. First we specify the row of the subgrid we should iterate over (there are $n$ rows in a subgrid), starting at the top row and ending at the bottom row of the subgrid. For each subgrid row, we have to iterate over the number of variables, of which there are $n^3$. This results in two more 'for' loops:</p>
+<ul>
+<li>'row_num' stands for the row in the subgrid (top to bottom), of which there are $n$.</li>
+<li>'i' is an iterable for the number of variables per row in a subgrid. There are $n^3$ variables per row in a subgrid .</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span>    <span class="c1">##### 1. First get the variables for each subgrid (sg)  and store it in a dictionary</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Sudoku9A</span><span class="p">)))</span>                 <span class="c1"># specify one of the sudokus</span>
+    
+    <span class="n">sg_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>                     <span class="c1"># define a dict for storing the variables per subgrid</span>
+    <span class="k">for</span> <span class="n">sg_r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>                         <span class="c1"># iterate over of row indices for the subgrids</span>
+        <span class="k">for</span> <span class="n">sg_c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>                     <span class="c1"># iterate over of column indices for the subgrids</span>
+            <span class="n">sg_dict</span><span class="p">[</span><span class="n">sg_r</span><span class="p">][</span><span class="n">sg_c</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>                <span class="c1"># intialize list for a new subgrid </span>
+            <span class="k">for</span> <span class="n">row_num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>              <span class="c1"># iterate over rows of a subgrid (is multiplied by n^4 later)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">3</span><span class="p">)):</span>         <span class="c1"># iterate over number of variables per row in a subgrid   </span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;some maths expressions&#39;</span><span class="p">)</span>                      
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Great, now that we know the 'for' loop structure, we need an equation to calculate the index values for the integers.</p>
+<ul>
+<li>For iterating over the variables in a cell, we can use 'i'.</li>
+<li>For iterating over the rows in a subgrid, we know that each subgrid row has $n^4$ variables.</li>
+<li>For iterating over the sudokus subgrid indices, we know that a subgrid row index contributes $n^5$ variables.</li>
+<li>For iterating over the sudokus subgrid indices, we know that a subgrid column index contributes $n^3$ variables.</li>
+</ul>
+<p>This leads to the following expression for deriving a subgrid's variables in a list:</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs   celltag_outputPrepend">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span>    <span class="c1">##### 1. First get the variables for each sub-grid (sg)  and store it in a dictionary</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Sudoku9A</span><span class="p">)))</span>       <span class="c1"># specify one of the sudokus</span>
+    
+    <span class="n">sg_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>                                 <span class="c1"># define a dict for storing the variables per box</span>
+    <span class="k">for</span> <span class="n">sg_r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>                                     <span class="c1"># iterate over of row indices for the boxes</span>
+        <span class="k">for</span> <span class="n">sg_c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>                                 <span class="c1"># iterate over of column indices for the boxes</span>
+            <span class="n">sg_dict</span><span class="p">[</span><span class="n">sg_r</span><span class="p">][</span><span class="n">sg_c</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>                            <span class="c1"># intialize list for a new box </span>
+            <span class="k">for</span> <span class="n">row_num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>                          <span class="c1"># iterate over rows of a box (is multiplied by N^2 later)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">3</span><span class="p">)):</span>                     <span class="c1"># iterate over number of variables per row in a box                                                          </span>
+                    <span class="c1"># compute variable number and append to list</span>
+                    <span class="n">variable</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="p">(</span><span class="n">row_num</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span><span class="o">+</span><span class="p">(</span><span class="n">sg_r</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span><span class="o">+</span><span class="n">sg_c</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>      
+                    <span class="c1"># append variable list for that box inside a dict            </span>
+                    <span class="n">sg_dict</span><span class="p">[</span><span class="n">sg_r</span><span class="p">][</span><span class="n">sg_c</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>         
+
+                    <span class="c1">##### uncomment if you want to see the variables</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Added </span><span class="si">{</span><span class="n">variable</span><span class="si">}</span><span class="s1"> in list of box(</span><span class="si">{</span><span class="n">sg_r</span><span class="si">}</span><span class="s1">,</span><span class="si">{</span><span class="n">sg_c</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Awesome! Now that you have the subgrid's variables, we can start weighting integer combinations. This is to avoid integers from occuring multiple times inside a single subgrid. However we don't need to weight combinations between variables on the same rows and columns, as that was already done in the previous constraints.</p>
+<p>As we've constructed a dictionary of lists of all subgrid variables, it has become much easier to start making combinations. The main reason being that the integer variables in the lists are already sorted according to the subgrid indices in a list. The following terms are introduced to make life easier:</p>
+<ul>
+<li>we use 'r' to denote the reference variable in a list</li>
+<li>we use 't' to denote the target variable in a</li>
+<li>we use the 'shift' to select a new starting integer variable in the list</li>
+</ul>
+<p>The assignment has become to iterate over a list (very common problem), for which respective variable combinations representing the same integer need to be weighted. The above variables select members of the list as in the visually decribed below:</p>
+<p><img src="./subgrid_list_iter.png" alt="example"></p>
+<p>In order to select the same integer variables, we need to make sure the distance between the list terms is $n^2$. By moving right to left in the list, we make sure all combinations are encountered at least once for an integer. This can be seen in the 'for' loops.</p>
+<p>But now the big question appears, how do we weight the combinations of variables that are not on the same row or column? Those are the only combinations that need to be assigned weights, right?</p>
+<p>Correct, so what we do is calculate the row and column for each variable (row and column for the entire Sudoku). This is to make sure the integers are not horizontally or vertically aligned, because this has already been considered in previous constraints. If they are not aligned, we can weight the combinations, since it means they are inside the same subgrid but not on the same row or column. This is described by the terms:</p>
+<ul>
+<li>row_num_r  - row for the reference </li>
+<li>col_num_r  - column for the reference</li>
+<li>row_num_t  - row for the target</li>
+<li>col_num_t  - column for the target</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span>    <span class="c1">##### 2. Now weight the variables that represent the same value and are inside the same box </span>
+    <span class="k">for</span> <span class="n">sg_r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>                                         <span class="c1"># select                                                  </span>
+        <span class="k">for</span> <span class="n">sg_c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">sg</span> <span class="o">=</span> <span class="n">sg_dict</span><span class="p">[</span><span class="n">sg_r</span><span class="p">][</span><span class="n">sg_c</span><span class="p">]</span>                
+            <span class="k">for</span> <span class="n">shift</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>                         
+                <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shift</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>
+                    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>
+                         
+                        <span class="n">row_num_r</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">sg</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">/</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+                        <span class="n">col_num_r</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">sg</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">%</span><span class="k">pow</span>(n,4))/pow(n,2))
+                        <span class="n">row_num_t</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">sg</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">/</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+                        <span class="n">col_num_t</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">sg</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">%</span><span class="k">pow</span>(n,4))/pow(n,2))
+
+                        <span class="c1">#print(f&#39;ref:{row_num_r},{col_num_r}&#39;)</span>
+                        <span class="c1">#print(f&#39;tar:{row_num_t},{col_num_t}&#39;)</span>
+                        
+                        <span class="c1"># We need to define Term, which is done inside the function (doesn&#39;t work here) -- see entire script in last section</span>
+                        <span class="c1">#if row_num_r != row_num_t and col_num_r != col_num_t:</span>
+                            
+                            <span class="c1">#terms.append(</span>
+                            <span class="c1">#    Term(</span>
+                            <span class="c1">#        c = 1,</span>
+                            <span class="c1">#        indices = [sg[r],sg[t]]   </span>
+                            <span class="c1">#    )</span>
+                            <span class="c1">#)</span>
+                        <span class="c1">#print(f&#39;{sg[r]},{sg[t]}&#39;) </span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Now we have to promote the solver to fill in values. This is done by assigning nearly each variable (not a combination!) a negative weight. This will encourage the solver to assign a variable ($x$) a '1' value. We do need to take into account the initial values that are filled already, these must be given a much more negative weight to discourage the solver from changing them. To implement this constraint, we simply iterate over the variables of the Sudoku.</p>
+<p>Below you can see how that this is done.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span>    <span class="c1">#####</span>
+    <span class="c1">##### Constraint 5: Promote to fill in values - Values already in the sudoku get a higher weighting! Can&#39;t use Term outside of function def</span>
+
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>                        <span class="c1"># iterate over rows</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>                    <span class="c1"># iterate over columns</span>
+            <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>              <span class="c1"># iterate over possible integer values</span>
+                <span class="k">if</span> <span class="n">SudokuMatrix</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="n">val</span><span class="p">:</span>         <span class="c1"># if there is a value filled in, give a much lower weight</span>
+                    <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>                                                  
+                        <span class="n">Term</span><span class="p">(</span>
+                            <span class="n">c</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span>
+                            <span class="n">indices</span> <span class="o">=</span> <span class="p">[(</span><span class="n">val</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">col</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="n">row</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">)]</span>   
+                        <span class="p">)</span>
+                    <span class="p">)</span>
+                    <span class="c1">#print(&#39;Directly influenced by initial conditions&#39;)</span>
+                    <span class="c1">#print(f&#39;{(val-1)+col*pow(n,2)+row*pow(n,4)}&#39;)</span>
+                <span class="k">elif</span> <span class="n">SudokuMatrix</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>         
+                    <span class="c1"># if no value is filled in that cell, promote the solver to fill in a weight</span>
+                    <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="n">Term</span><span class="p">(</span>
+                            <span class="n">c</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                            <span class="n">indices</span> <span class="o">=</span> <span class="p">[(</span><span class="n">val</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">col</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="n">row</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">)]</span>   
+                        <span class="p">)</span>
+                    <span class="p">)</span>
+
+                    <span class="c1">#print(&#39;Not directly influenced by initial conditions&#39;)</span>
+                    <span class="c1">#print(f&#39;{(val-1)+col*pow(n,2)+row*pow(n,4)}&#39;) </span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Great! That was the last constraint. Below we've combined all the snippets to a single runnable piece of code. You can submit to Azure and specify one of the solvers below. You can refer to the Python file to see how to read the results into an understandble way.</p>
+<p>Well done! You have finished formulating a QIO for Sudoku and are ready to solve it.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs   celltag_outputPrepend">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span>   <span class="c1">############################################################################################</span>
+<span class="c1">##### Generate problem instance</span>
+<span class="k">def</span> <span class="nf">SudokuProblem</span><span class="p">(</span><span class="n">SudokuMatrix</span><span class="p">):</span>
+
+    <span class="n">terms</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">SudokuMatrix</span><span class="p">)))</span>
+
+    <span class="c1">#####</span>
+    <span class="c1">##### Constraint 1: Per cell, only one variable may be &#39;1&#39;, the others must be zero =&gt; then only one integer is assigned to the cell</span>
+
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>                   <span class="c1"># iterate over the rows of the matrix</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>                <span class="c1"># iterate over the columns of the matrix</span>
+            <span class="k">for</span> <span class="n">ref</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>          <span class="c1"># select the reference variable in cell</span>
+                <span class="k">for</span> <span class="n">tar</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>      <span class="c1"># select the target variable in cell  </span>
+                    <span class="k">if</span> <span class="n">ref</span><span class="o">&lt;</span><span class="n">tar</span><span class="p">:</span>                    <span class="c1"># prevent weighting combinations twice, therefore ref&lt;tar</span>
+                        <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                            <span class="n">Term</span><span class="p">(</span>
+                                <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                                <span class="n">indices</span> <span class="o">=</span> <span class="p">[(</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="n">r</span> <span class="o">+</span> <span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="o">+</span><span class="n">ref</span><span class="p">),(</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="n">r</span> <span class="o">+</span> <span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="o">+</span><span class="n">tar</span><span class="p">)]</span>   
+                            <span class="p">)</span>
+                        <span class="p">)</span>
+                        <span class="c1"># uncomment if you want to see the weighting combinations</span>
+                        <span class="c1">#print(f&#39;{(pow(n,4)*r + pow(n,2)*c+ref)},{(pow(n,4)*r + pow(n,2)*c+tar)}&#39;)   </span>
+    
+    <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">tar</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>   <span class="c1"># set variables back to 0 for next loops</span>
+    
+    <span class="c1">#####</span>
+    <span class="c1">##### Constraint 2: Per row, an integer may only appear once! </span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>                                <span class="c1"># iterate over the rows of the matrix                                     </span>
+        <span class="k">for</span> <span class="n">ref</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">)):</span>           <span class="c1"># select reference variable     </span>
+            <span class="k">for</span> <span class="n">tar</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ref</span><span class="p">,(</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>     <span class="c1"># select a target variable, which is the reference variable plus a multiple of N (same int but next cell)</span>
+                <span class="k">if</span> <span class="n">ref</span><span class="o">&lt;</span><span class="n">tar</span><span class="p">:</span>                                    <span class="c1"># prevent weighting combinations twice, therefore ref&lt;tar</span>
+                    <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="n">Term</span><span class="p">(</span>
+                            <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                            <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">ref</span><span class="p">,</span><span class="n">tar</span><span class="p">]</span>   
+                        <span class="p">)</span>
+                    <span class="p">)</span>
+                    <span class="c1">##### uncomment if you want to see the weighting combinations</span>
+                    <span class="c1">#print(f&#39;{ref},{tar}&#39;)</span>
+    <span class="n">r</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">tar</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    
+    <span class="c1">#####</span>
+    <span class="c1">##### Constraint 3: Per column, an integer may only appear once! </span>
+    
+    <span class="k">for</span> <span class="n">ref</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">6</span><span class="p">)):</span>                    <span class="c1"># select reference variable </span>
+        <span class="k">for</span> <span class="n">tar</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">)):</span>     <span class="c1"># select target variable, which is the reference variable plus a multiple of N^2 (same int but next row)</span>
+            <span class="k">if</span> <span class="n">ref</span><span class="o">&lt;</span><span class="n">tar</span><span class="p">:</span>                              <span class="c1"># prevent weighting combinations twice, therefore ref&lt;tar</span>
+                <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">Term</span><span class="p">(</span>
+                        <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">ref</span><span class="p">,</span><span class="n">tar</span><span class="p">]</span>   
+                    <span class="p">)</span>
+                <span class="p">)</span>
+                <span class="c1">##### uncomment if you want to see the weighting combinations</span>
+                <span class="c1">#print(f&#39;{ref},{tar}&#39;)</span>
+    <span class="n">ref</span><span class="p">,</span> <span class="n">tar</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+
+    <span class="c1">#####</span>
+    <span class="c1">##### Constraint 4: In each box/area, an integer may only appear once!</span>
+   
+    <span class="c1">##### 1. First get the variables for each sub-grid (sg)  and store it in a dictionary</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Sudoku9A</span><span class="p">)))</span>       <span class="c1"># specify one of the sudokus</span>
+    
+    <span class="n">sg_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>                <span class="c1"># define a dict for storing the variables per subgrid</span>
+    <span class="k">for</span> <span class="n">sg_r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>                    <span class="c1"># iterate over of row indices for the subgrids</span>
+        <span class="k">for</span> <span class="n">sg_c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>                <span class="c1"># iterate over of column indices for the subgrids</span>
+            <span class="n">sg_dict</span><span class="p">[</span><span class="n">sg_r</span><span class="p">][</span><span class="n">sg_c</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>           <span class="c1"># intialize list for a new subgrid </span>
+            <span class="k">for</span> <span class="n">row_num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>         <span class="c1"># iterate over rows of a subgrid (is multiplied by n^4 later)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">3</span><span class="p">)):</span>    <span class="c1"># iterate over number of variables per row in a subgrid                                                          </span>
+                    <span class="c1"># compute variable number and append to list</span>
+                    <span class="n">variable</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="p">(</span><span class="n">row_num</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span><span class="o">+</span><span class="p">(</span><span class="n">sg_r</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span><span class="o">+</span><span class="n">sg_c</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>      
+                    <span class="c1"># append variable list for that box inside a dict            </span>
+                    <span class="n">sg_dict</span><span class="p">[</span><span class="n">sg_r</span><span class="p">][</span><span class="n">sg_c</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>         
+
+                    <span class="c1">##### uncomment if you want to see the variables</span>
+                    <span class="c1">#print(f&#39;Added {variable} in list of box({sg_r},{sg_c})&#39;)</span>
+
+    <span class="n">sg_r</span><span class="p">,</span> <span class="n">sg_c</span><span class="p">,</span> <span class="n">row_num</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span> 
+
+    <span class="c1">##### 2. Now weight the variables that represent the same value and are inside the same box </span>
+    <span class="k">for</span> <span class="n">sg_r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>                                                       <span class="c1"># select subgrid row                                                </span>
+        <span class="k">for</span> <span class="n">sg_c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>                                                   <span class="c1"># select subgrid column</span>
+            <span class="n">sg</span> <span class="o">=</span> <span class="n">sg_dict</span><span class="p">[</span><span class="n">sg_r</span><span class="p">][</span><span class="n">sg_c</span><span class="p">]</span>                                              <span class="c1"># fetch list of subgrid&#39;s </span>
+            <span class="k">for</span> <span class="n">shift</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>                         
+                <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shift</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>
+                    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>
+                         
+                        <span class="n">row_num_r</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">sg</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">/</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+                        <span class="n">col_num_r</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">sg</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">%</span><span class="k">pow</span>(n,4))/pow(n,2))
+                        <span class="n">row_num_t</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">sg</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">/</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+                        <span class="n">col_num_t</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">sg</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">%</span><span class="k">pow</span>(n,4))/pow(n,2))
+
+                        <span class="c1">#print(f&#39;ref:{row_num_r},{col_num_r}&#39;)</span>
+                        <span class="c1">#print(f&#39;tar:{row_num_t},{col_num_t}&#39;)</span>
+
+                        <span class="k">if</span> <span class="n">row_num_r</span> <span class="o">!=</span> <span class="n">row_num_t</span> <span class="ow">and</span> <span class="n">col_num_r</span> <span class="o">!=</span> <span class="n">col_num_t</span><span class="p">:</span>
+                            
+                            <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                                <span class="n">Term</span><span class="p">(</span>
+                                    <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                                    <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">sg</span><span class="p">[</span><span class="n">r</span><span class="p">],</span><span class="n">sg</span><span class="p">[</span><span class="n">t</span><span class="p">]]</span>   
+                                <span class="p">)</span>
+                            <span class="p">)</span>
+                        <span class="c1">#print(f&#39;{sg[r]},{sg[t]}&#39;) </span>
+
+
+    <span class="c1">#####</span>
+    <span class="c1">##### Constraint 5: Promote to fill in values - Values already in the sudoku get a higher weighting! Can&#39;t use Term outside of function def</span>
+
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>                    <span class="c1"># iterate over rows</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)):</span>                <span class="c1"># iterate over columns</span>
+            <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>          <span class="c1"># iterate over possible integer values</span>
+                <span class="k">if</span> <span class="n">SudokuMatrix</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="n">val</span><span class="p">:</span>     <span class="c1"># if there is a value filled in, give a much lower weight</span>
+                    <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>                                                  
+                        <span class="n">Term</span><span class="p">(</span>
+                            <span class="n">c</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span>
+                            <span class="n">indices</span> <span class="o">=</span> <span class="p">[(</span><span class="n">val</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">col</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="n">row</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">)]</span>   
+                        <span class="p">)</span>
+                    <span class="p">)</span>
+                    <span class="c1">#print(&#39;Directly influenced by initial conditions&#39;)</span>
+                    <span class="c1">#print(f&#39;{(val-1)+col*pow(n,2)+row*pow(n,4)&#39;)</span>
+                <span class="k">elif</span> <span class="n">SudokuMatrix</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>                
+                    
+                    <span class="c1"># if no value is filled in that cell, promote the solver to fill in a weight</span>
+                    <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="n">Term</span><span class="p">(</span>
+                            <span class="n">c</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                            <span class="n">indices</span> <span class="o">=</span> <span class="p">[(</span><span class="n">val</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">col</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="n">row</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">)]</span>    
+                        <span class="p">)</span>
+                    <span class="p">)</span>
+
+                    <span class="c1">#print(&#39;Not directly influenced by initial conditions&#39;)</span>
+                    <span class="c1">#print(f&#39;{(val-1)+col*pow(n,2)+row*pow(n,4)&#39;) </span>
+
+    <span class="k">return</span> <span class="n">Problem</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;SudokuOptProblem&quot;</span><span class="p">,</span> <span class="n">problem_type</span><span class="o">=</span><span class="n">ProblemType</span><span class="o">.</span><span class="n">pubo</span><span class="p">,</span> <span class="n">terms</span><span class="o">=</span><span class="n">terms</span><span class="p">)</span>
+
+
+
+<span class="c1">############################################################################################</span>
+<span class="c1">##### Generate cost function</span>
+<span class="n">OptimizationProblem</span> <span class="o">=</span> <span class="n">SudokuProblem</span><span class="p">(</span><span class="n">Sudoku9A</span><span class="p">)</span>
+
+<span class="c1"># Choose the solver and parameters --- uncomment if you wish to use a different one</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">SimulatedAnnealing</span><span class="p">(</span><span class="n">workspace</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">120</span><span class="p">)</span>   
+<span class="c1">#solver = ParallelTempering(workspace, timeout = 120)</span>
+<span class="c1">#solver = Tabu(workspace, timeout = 120)</span>
+<span class="c1">#solver = QuantumMonteCarlo(workspace, sweeps = 2, trotter_number = 10, restarts = 72, seed = 22, beta_start = 0.1, transverse_field_start = 10, transverse_field_stop = 0.1) # QMC is not available parameter-free yet</span>
+
+   
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Great! Now you can start playing around with the solver. In the folder you can find a Python file that contains a verification method to check the solutions returned by the solver. It can be that the solver returns incorrect solutions. Have fun =)!</p>
+
+</div>
 </div>
 </body>
 

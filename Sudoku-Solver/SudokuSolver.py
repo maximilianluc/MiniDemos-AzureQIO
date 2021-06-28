@@ -8,11 +8,8 @@ from azure.quantum.optimization import Problem, ProblemType, Term
 from azure.quantum.optimization import SimulatedAnnealing, ParallelTempering, Tabu, QuantumMonteCarlo, HardwarePlatform, Solver
 
 workspace = Workspace(
-    subscription_id = "",  # Add your subscription_id
-    resource_group = "",   # Add your resource_group
-    name = "",             # Add your workspace name
-    location = "",          # Add your workspace location (for example, "westus")
-    resource_id = ""
+    resource_id = "", # add the Resource ID of your Azure Quantum workspace
+    location = ""     # add the location of your Azure Quantum workspace (e.g. "westus")
 )
 
 ##### Some example sudokus that can be solved.
@@ -158,7 +155,6 @@ def SudokuProblem(SudokuMatrix):
 
     ####################################################################################################################################
     ##### Constraint 5: Promote to fill in values - Values already in the sudoku get a higher weighting! 
-    # Incomplete
 
     for row in range(0,N):
         for col in range(0,N):
@@ -167,15 +163,6 @@ def SudokuProblem(SudokuMatrix):
                     terms.append(
                         Term(
                             c = -5,
-                            indices = [(val-1)+col*N+row*pow(N,2)]   
-                        )
-                    )
-                    #print('Directly influenced by initial conditions')
-                    #print(f'{(val-1)+col*N+row*pow(N,2)}')
-                elif SudokuMatrix[row,col] != val and SudokuMatrix[row,col] != 0:
-                    terms.append(
-                        Term(
-                            c = 5,
                             indices = [(val-1)+col*N+row*pow(N,2)]   
                         )
                     )
@@ -293,7 +280,7 @@ def VerifyResults(SortedAns, SolvedSudoku):
 
 ############################################################################################
 ##### Generate cost function
-OptimizationProblem = SudokuProblem(Sudoku4B)
+OptimizationProblem = SudokuProblem(Sudoku9B)
 
 # Choose the solver and parameters --- uncomment if you wish to use a different one
 solver = SimulatedAnnealing(workspace, timeout = 120)   
@@ -302,7 +289,7 @@ solver = SimulatedAnnealing(workspace, timeout = 120)
 #solver = QuantumMonteCarlo(workspace, sweeps = 2, trotter_number = 10, restarts = 72, seed = 22, beta_start = 0.1, transverse_field_start = 10, transverse_field_stop = 0.1) # QMC is not available parameter-free yet
 
 SolverSolution = solver.optimize(OptimizationProblem)  
-SolvedSudoku   = ReadResults(SolverSolution['configuration'], Sudoku4B)
+SolvedSudoku   = ReadResults(SolverSolution['configuration'], Sudoku9B)
 
 
 
